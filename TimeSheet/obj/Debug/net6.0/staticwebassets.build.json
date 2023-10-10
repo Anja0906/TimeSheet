@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7TXILWCJFymCPDqzdDMjI2MK1ZCG8zs9MqEVWhHvdEc=",
+  "Source": "TimeSheet.WebAPI",
+  "BasePath": "_content/TimeSheet.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

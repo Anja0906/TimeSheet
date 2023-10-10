@@ -1,0 +1,17 @@
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Infrastructure.deps.json
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Infrastructure.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Infrastructure.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Core.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Data.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Core.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\bin\Debug\net6.0\TimeSheet.Data.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.AssemblyInfo.cs
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.csproj.CopyComplete
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\refint\TimeSheet.Infrastructure.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\TimeSheet.Infrastructure.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Infrastructure\obj\Debug\net6.0\ref\TimeSheet.Infrastructure.dll

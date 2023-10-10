@@ -1,0 +1,14 @@
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\bin\Debug\net6.0\TimeSheet.Core.deps.json
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\bin\Debug\net6.0\TimeSheet.Core.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\bin\Debug\net6.0\TimeSheet.Core.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.AssemblyInfoInputs.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.AssemblyInfo.cs
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.csproj.CoreCompileInputs.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\refint\TimeSheet.Core.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.pdb
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\ref\TimeSheet.Core.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\bin\Debug\net6.0\TimeSheet.Core.runtimeconfig.json
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.genruntimeconfig.cache
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet.Core\obj\Debug\net6.0\TimeSheet.Core.csproj.AssemblyReference.cache
