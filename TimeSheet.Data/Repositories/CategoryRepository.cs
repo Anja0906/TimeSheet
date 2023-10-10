@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using System.Collections.Immutable;
 using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.Models;
 
@@ -28,7 +27,7 @@ namespace TimeSheet.Data.Repositories
             _dataContext.SaveChanges();
         }
 
-        public Task<List<Category>> GetAll()
+        public List<Category> GetAll()
         {
             var categories = _dataContext.Categories.OrderBy(p => p.Id).ToList();
             List<Category> result = new List<Category>();
@@ -37,21 +36,21 @@ namespace TimeSheet.Data.Repositories
                 var categoryModel = _mapper.Map<Category>(category);
                 result.Add(categoryModel);
             }
-            return Task.FromResult(result);
+            return result;
         }
 
-        public Task<Category> GetById(int id)
+        public Category GetById(int id)
         {
             var categoryEntity = _dataContext.Categories.Where(p => p.Id == id).FirstOrDefault();
             var categoryModel = _mapper.Map<Category>(categoryEntity);
-            return Task.FromResult(categoryModel);
+            return categoryModel;
         }
 
-        public Task<Category> GetByName(string name)
+        public Category GetByName(string name)
         {
             var categoryEntity = _dataContext.Categories.Where(p => p.Name == name).FirstOrDefault();
             var categoryModel = _mapper.Map<Category>(categoryEntity);
-            return Task.FromResult(categoryModel);
+            return categoryModel;
         }
 
         public Category UpdateCategory(Category category)

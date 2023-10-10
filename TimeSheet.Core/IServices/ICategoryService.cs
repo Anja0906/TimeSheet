@@ -4,11 +4,11 @@ namespace TimeSheet.Core.IServices
 {
     public interface ICategoryService
     {
-        Task<Category> GetByName(string name);
+        Category GetByName(string name);
         void AddCategory(Category category);
         void DeleteCategory(int id);
         Category UpdateCategory(Category category);
-        Task<List<Category>> GetAll();
-        Task<Category> GetById(int id);
+        List<Category> GetAll();
+        Category GetById(int id);
     }
 }

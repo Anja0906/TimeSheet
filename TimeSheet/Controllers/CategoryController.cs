@@ -12,121 +12,63 @@ namespace TimeSheet.WebAPI.Controllers
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
 
-        const string getAll = "/categories";
-        const string findByName = "/findCategoryByName/{name}";
-        const string findById = "/category/{id}";
-        const string create = "/category";
-        const string update = "/category/update";
-        const string delete = "/category/delete/{id}";
+        private const string GET_ALL = "/categories";
+        private const string FIND_BY_NAME = "/findCategoryByName/{name}";
+        private const string FIND_BY_ID = "/category/{id}";
+        private const string CREATE = "/category";
+        private const string UPDATE = "/category/update";
+        private const string DELETE = "/category/delete/{id}";
         public CategoryController(IMapper mapper, ICategoryService categoryService)
         {
             _mapper = mapper;
             _categoryService = categoryService;
         }
-        [HttpGet(getAll)]
-        [ProducesResponseType(typeof(Task<List<CategoryResponseDTO>>), StatusCodes.Status200OK)]
+        [HttpGet(GET_ALL)]
+        [ProducesResponseType(200, Type = typeof(List<CategoryResponseDTO>))]
         public IActionResult GetAll()
         {
-            try
-            {
-                var serviceResponse = _categoryService.GetAll();
-                var response = _mapper.Map<List<CategoryResponseDTO>>(serviceResponse);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var serviceResponse = _categoryService.GetAll();
+            var response = _mapper.Map<List<CategoryResponseDTO>>(serviceResponse);
+            return Ok(response);
         }
-        [HttpGet(findByName)]
+        [HttpGet(FIND_BY_NAME)]
         [ProducesResponseType(typeof(CategoryResponseDTO), StatusCodes.Status200OK)]
         public IActionResult Get([FromRoute] string name)
         {
-            try
-            {
-                var category = _categoryService.GetByName(name);
-                var result = _mapper.Map<CategoryResponseDTO>(category);
-                return Ok(result);
-            }
-            catch (NullReferenceException ex)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new { exception_message = "Category with this id does not exist!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var category = _categoryService.GetByName(name);
+            var result = _mapper.Map<CategoryResponseDTO>(category);
+            return Ok(result);
         }
-        [HttpGet(findById)]
+        [HttpGet(FIND_BY_ID)]
         [ProducesResponseType(typeof(CategoryResponseDTO), StatusCodes.Status200OK)]
         public IActionResult GetById([FromRoute] int id)
         {
-            try
-            {
-                var category = _categoryService.GetById(id);
-                var result = _mapper.Map<CategoryResponseDTO>(category);
-                return Ok(result);
-            }
-            catch (NullReferenceException ex)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new { exception_message = "Category with this id does not exist!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var category = _categoryService.GetById(id);
+            var result = _mapper.Map<CategoryResponseDTO>(category);
+            return Ok(result);
         }
-        [HttpPost(create)]
+        [HttpPost(CREATE)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         public IActionResult Post(CategoryDTO categoryDTO)
         {
-            try
-            {
-                var categoryModel = _mapper.Map<Category>(categoryDTO);
-                _categoryService.AddCategory(categoryModel);
-                return Ok("Successfully created category!");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var categoryModel = _mapper.Map<Category>(categoryDTO);
+            _categoryService.AddCategory(categoryModel);
+            return Ok("Successfully created category!");
         }
-        [HttpPut(update)]
+        [HttpPut(UPDATE)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         public IActionResult Put(UpdateCategoryDTO categoryDTO)
         {
-            try
-            {
-                var categoryModel = _mapper.Map<Category>(categoryDTO);
-                _categoryService.UpdateCategory(categoryModel);
-                return Ok("Successfully updated category!");
-            }
-            catch (NullReferenceException ex)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new { exception_message = "Category with this id does not exist!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var categoryModel = _mapper.Map<Category>(categoryDTO);
+            _categoryService.UpdateCategory(categoryModel);
+            return Ok("Successfully updated category!");
         }
-        [HttpDelete(delete)]
+        [HttpDelete(DELETE)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         public IActionResult Delete([FromRoute] int id)
         {
-            try
-            {
-                _categoryService.DeleteCategory(id);
-                return Ok("Successfully deleted category!");
-            }
-            catch (NullReferenceException ex)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new { exception_message = "Category with this id does not exist!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            _categoryService.DeleteCategory(id);
+            return Ok("Successfully deleted category!");
         }
     }
 }

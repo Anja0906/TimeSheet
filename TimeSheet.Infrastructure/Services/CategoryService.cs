@@ -22,7 +22,7 @@ namespace TimeSheet.Infrastructure.Services
             _categoryRepository.DeleteCategory(id);
         }
 
-        public Task<List<Category>> GetAll()
+        public List<Category> GetAll()
         {
             return _categoryRepository.GetAll();
         }
@@ -32,12 +32,12 @@ namespace TimeSheet.Infrastructure.Services
             return _categoryRepository.UpdateCategory(category);
         }
 
-        public Task<Category> GetByName(string name)
+        public Category GetByName(string name)
         {
            return _categoryRepository.GetByName(name);
         }
 
-        public Task<Category> GetById(int id)
+        public Category GetById(int id)
         {
             return _categoryRepository.GetById(id);
         }

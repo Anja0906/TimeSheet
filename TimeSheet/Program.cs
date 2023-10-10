@@ -6,10 +6,10 @@ using TimeSheet.Data;
 using TimeSheet.Data.Repositories;
 using TimeSheet.Infrastructure.Services;
 using TimeSheet.WebAPI;
+using TimeSheet.WebAPI.ExceptionHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -37,8 +37,6 @@ void SeedData(IHost app)
     }
 }
 
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -48,6 +46,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 
