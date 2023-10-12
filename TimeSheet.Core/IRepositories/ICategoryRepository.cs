@@ -4,11 +4,11 @@ namespace TimeSheet.Core.IRepositories
 {
     public interface ICategoryRepository
     {
-        Category GetByName(string name);
-        void AddCategory(Category category);
+        Task<Category> GetByName(string name);
+        Task<Category> UpdateCategory(Category category);
+        Task<List<Category>> GetAll();
+        Task<Category> GetById(int id);
+        Task<Category> AddCategory(Category category);
         void DeleteCategory(int id);
-        Category UpdateCategory(Category category);
-        List<Category> GetAll();
-        Category GetById(int id);
     }
 }

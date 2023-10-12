@@ -13,9 +13,9 @@ namespace TimeSheet.Infrastructure.Services
         {
             _countryRepository = countryRepository;
         }
-        public void AddCountry(Country country)
+        public Task<Country> AddCountry(Country country)
         {
-            _countryRepository.AddCountry(country);
+            return _countryRepository.AddCountry(country);
         }
 
         public void DeleteCountry(int id)
@@ -38,7 +38,7 @@ namespace TimeSheet.Infrastructure.Services
             return _countryRepository.GetByName(name);
         }
 
-        public Country UpdateCountry(Country country)
+        public Task<Country> UpdateCountry(Country country)
         {
             return _countryRepository.UpdateCountry(country);
         }

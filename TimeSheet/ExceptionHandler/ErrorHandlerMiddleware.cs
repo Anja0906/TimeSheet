@@ -26,16 +26,13 @@ namespace TimeSheet.WebAPI.ExceptionHandler
 
                 switch (error)
                 {
-                    case CategoryNotFoundException e:
-                        // custom application error
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        break;
-                    case KeyNotFoundException e:
-                        // not found error
+                    case ResourceNotFoundException :
+                    case KeyNotFoundException :
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case EmptyFieldException:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest; break;
                     default:
-                        // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }

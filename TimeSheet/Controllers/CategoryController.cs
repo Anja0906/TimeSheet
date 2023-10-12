@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
+using TimeSheet.Service.Routes;
 using TimeSheet.WebAPI.DTOs;
 
 namespace TimeSheet.WebAPI.Controllers
@@ -11,59 +12,54 @@ namespace TimeSheet.WebAPI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
-
-        private const string GET_ALL = "/categories";
-        private const string FIND_BY_NAME = "/findCategoryByName/{name}";
-        private const string FIND_BY_ID = "/category/{id}";
-        private const string CREATE = "/category";
-        private const string UPDATE = "/category/update";
-        private const string DELETE = "/category/delete/{id}";
         public CategoryController(IMapper mapper, ICategoryService categoryService)
         {
             _mapper = mapper;
             _categoryService = categoryService;
         }
-        [HttpGet(GET_ALL)]
+        [HttpGet(CategoryRoutes.CategoryGetAll)]
         [ProducesResponseType(200, Type = typeof(List<CategoryResponseDTO>))]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var serviceResponse = _categoryService.GetAll();
+            var serviceResponse = await _categoryService.GetAll();
             var response = _mapper.Map<List<CategoryResponseDTO>>(serviceResponse);
             return Ok(response);
         }
-        [HttpGet(FIND_BY_NAME)]
+        [HttpGet(CategoryRoutes.CategoryFindByName)]
         [ProducesResponseType(typeof(CategoryResponseDTO), StatusCodes.Status200OK)]
-        public IActionResult Get([FromRoute] string name)
+        public async Task<IActionResult> Get([FromRoute] string name)
         {
-            var category = _categoryService.GetByName(name);
+            var category = await _categoryService.GetByName(name);
             var result = _mapper.Map<CategoryResponseDTO>(category);
             return Ok(result);
         }
-        [HttpGet(FIND_BY_ID)]
+        [HttpGet(CategoryRoutes.CategoryFindById)]
         [ProducesResponseType(typeof(CategoryResponseDTO), StatusCodes.Status200OK)]
-        public IActionResult GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var category = _categoryService.GetById(id);
+            var category = await _categoryService.GetById(id);
             var result = _mapper.Map<CategoryResponseDTO>(category);
             return Ok(result);
         }
-        [HttpPost(CREATE)]
+        [HttpPost(CategoryRoutes.CategoryCreate)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
-        public IActionResult Post(CategoryDTO categoryDTO)
+        public async Task<IActionResult> Post(CategoryDTO categoryDTO)
         {
             var categoryModel = _mapper.Map<Category>(categoryDTO);
-            _categoryService.AddCategory(categoryModel);
-            return Ok("Successfully created category!");
+            var createdModel = await _categoryService.AddCategory(categoryModel);
+            var response = new{ Model = createdModel,  Message = "Successfully created category!" };
+            return Ok(response);
         }
-        [HttpPut(UPDATE)]
+        [HttpPut(CategoryRoutes.CategoryUpdate)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
-        public IActionResult Put(UpdateCategoryDTO categoryDTO)
+        public async Task<IActionResult> Put(CategoryResponseDTO categoryDTO)
         {
             var categoryModel = _mapper.Map<Category>(categoryDTO);
-            _categoryService.UpdateCategory(categoryModel);
-            return Ok("Successfully updated category!");
+            var updatedModel =  await _categoryService.UpdateCategory(categoryModel);
+            var response = new { Model = updatedModel, Message = "Successfully created category!" };
+            return Ok(response);
         }
-        [HttpDelete(DELETE)]
+        [HttpDelete(CategoryRoutes.CategoryDelete)]
         [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         public IActionResult Delete([FromRoute] int id)
         {

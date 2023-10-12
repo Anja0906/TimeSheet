@@ -12,9 +12,9 @@ namespace TimeSheet.Infrastructure.Services
         {
             _categoryRepository = categoryRepository;
         }
-        public void AddCategory(Category category)
+        public Task<Category> AddCategory(Category category)
         {
-            _categoryRepository.AddCategory(category);
+            return _categoryRepository.AddCategory(category);
         }
 
         public void DeleteCategory(int id)
@@ -22,22 +22,22 @@ namespace TimeSheet.Infrastructure.Services
             _categoryRepository.DeleteCategory(id);
         }
 
-        public List<Category> GetAll()
+        public Task<List<Category>> GetAll()
         {
             return _categoryRepository.GetAll();
         }
 
-        public Category UpdateCategory(Category category)
+        public Task<Category> UpdateCategory(Category category)
         {
             return _categoryRepository.UpdateCategory(category);
         }
 
-        public Category GetByName(string name)
+        public Task<Category> GetByName(string name)
         {
            return _categoryRepository.GetByName(name);
         }
 
-        public Category GetById(int id)
+        public Task<Category> GetById(int id)
         {
             return _categoryRepository.GetById(id);
         }

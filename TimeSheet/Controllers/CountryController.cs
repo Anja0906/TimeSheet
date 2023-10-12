@@ -3,110 +3,68 @@ using Microsoft.AspNetCore.Mvc;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
 using TimeSheet.WebAPI.DTOs;
+using TimeSheet.WebAPI.Routes;
 
 namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class CountryController : Controller
     {
         private readonly IMapper _mapper;
         private readonly ICountryService _countryService;
-
         public CountryController(IMapper mapper, ICountryService countryService)
         {
             _mapper = mapper;
             _countryService = countryService;
         }
-        [HttpGet("GetAll")]
+        [HttpGet(CountryRoutes.CountryGetAll)]
         [ProducesResponseType(typeof(List<Country>), StatusCodes.Status200OK)]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                var result = _countryService.GetAll();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var serviceResponse = await _countryService.GetAll();
+            var response = _mapper.Map<List<CountryResponseDTO>>(serviceResponse);
+            return Ok(response);
         }
-        [HttpGet("/Country/FindByName")]
+        [HttpGet(CountryRoutes.CountryFindByName)]
         [ProducesResponseType(typeof(Country), StatusCodes.Status200OK)]
-        public IActionResult Get(string name)
+        public async Task<IActionResult> Get(string name)
         {
-            try
-            {
-                var country = _countryService.GetByName(name);
-                return Ok(country);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var country = await _countryService.GetByName(name);
+            var result = _mapper.Map<CountryResponseDTO>(country);
+            return Ok(result);
         }
-        [HttpGet("/Country/FindById")]
+        [HttpGet(CountryRoutes.CountryFindById)]
         [ProducesResponseType(typeof(Country), StatusCodes.Status200OK)]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var country = _countryService.GetById(id);
-                return Ok(country);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var country = await _countryService.GetById(id);
+            var result = _mapper.Map<CountryResponseDTO>(country);
+            return Ok(result);
         }
-        [HttpPost("/Country/New")]
+        [HttpPost(CountryRoutes.CountryCreate)]
         [ProducesResponseType(typeof(Country), StatusCodes.Status200OK)]
-        public IActionResult Post(CountryDTO countryDTO)
+        public async Task<IActionResult> Post(CountryDTO countryDTO)
         {
-            try
-            {
-                var countryModel = _mapper.Map<Country>(countryDTO);
-                _countryService.AddCountry(countryModel);
-                return Ok("Successfully created country!");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var countryModel = _mapper.Map<Country>(countryDTO);
+            var createdModel = await _countryService.AddCountry(countryModel);
+            var response = new { Model = createdModel, Message = "Successfully created country!" };
+            return Ok(response);
         }
-        [HttpPut("/Country/Update")]
+        [HttpPut(CountryRoutes.CountryUpdate)]
         [ProducesResponseType(typeof(Country), StatusCodes.Status200OK)]
-        public IActionResult Put(UpdateCountryDTO countryDTO)
+        public async Task<IActionResult> Put(CountryResponseDTO countryDTO)
         {
-            try
-            {
-                var countryModel = _mapper.Map<Country>(countryDTO);
-                _countryService.UpdateCountry(countryModel);
-                return Ok("Successfully updated country!");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            var countryModel = _mapper.Map<Country>(countryDTO);
+            var updatedModel = await _countryService.UpdateCountry(countryModel);
+            var response = new { Model = updatedModel, Message = "Successfully created country!" };
+            return Ok(response);
         }
-        [HttpDelete("/Country/Delete")]
+        [HttpDelete(CountryRoutes.CountryDelete)]
         [ProducesResponseType(typeof(Country), StatusCodes.Status200OK)]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _countryService.DeleteCountry(id);
-                return Ok("Successfully deleted country!");
-            }
-            catch (NullReferenceException ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = "Country with this id does not exist!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { exception_message = ex.Message });
-            }
+            _countryService.DeleteCountry(id);
+            return Ok("Successfully deleted country!");
         }
     }
 }

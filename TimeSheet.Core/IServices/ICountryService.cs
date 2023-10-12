@@ -5,9 +5,9 @@ namespace TimeSheet.Core.IServices
     public interface ICountryService
     {
         Task<Country> GetByName(string name);
-        void AddCountry(Country country);
+        Task<Country> AddCountry(Country country);
         void DeleteCountry(int id);
-        Country UpdateCountry(Country country);
+        Task<Country> UpdateCountry(Country country);
         Task<List<Country>> GetAll();
         Task<Country> GetById(int id);
 
