@@ -88,9 +88,8 @@ namespace TimeSheet.Data.Repositories
         public Task<Emplyee> AddProject(int id, Project project)
         {
             var existingEmplyee = _dataContext.Employees.Where(p => p.Id == id).FirstOrDefault();
-            var existingProject = _dataContext.WorkingHours.Where(p => p.Id==1).FirstOrDefault();
-            //existingEmplyee.WorkHours = new List<Entities.WorkingHour>() { existingProject };
-            
+            var existingProject = _dataContext.WorkingHours.Where(p => p.Id == 1).FirstOrDefault();
+   
             _dataContext.SaveChanges();
             return Task.FromResult(_mapper.Map<Emplyee>(existingEmplyee));
             /*if (existingEmplyee == null) { throw new ResourceNotFoundException("Emplyee with that id does not exist!"); }

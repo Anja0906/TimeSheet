@@ -12,7 +12,7 @@ namespace TimeSheet.Core.IRepositories
         Task<WorkingHour> GetByName(string name);
         Task<WorkingHour> UpdateWorkingHour(WorkingHour workingHour);
         Task<List<WorkingHour>> GetAll();
-        Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate, Dictionary<DateTime, int> calendar);
+        Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate);
         Task<WorkingHour> GetById(int id);
         Task<WorkingHour> AddWorkingHour(int WorkerId, WorkingHour workingHour);
         void DeleteWorkingHour(int id);

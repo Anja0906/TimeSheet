@@ -1,4 +1,5 @@
-﻿using TimeSheet.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
 
@@ -7,7 +8,6 @@ namespace TimeSheet.Service.Services
     public class WorkingHourService : IWorkingHourService
     {
         private readonly IWorkingHourRepository _workingHourRepository;
-        int hoursPerDayPartTime = 0;
         public WorkingHourService(IWorkingHourRepository workingHourRepository)
         {
             _workingHourRepository = workingHourRepository;
@@ -51,17 +51,23 @@ namespace TimeSheet.Service.Services
 
         public Task<CalendarResponse> GetCalendar(int userId, int hoursPerWeek, DateTime firstDay, DateTime lastDay)
         {
-            Dictionary<DateTime, int> calendar = new Dictionary<DateTime, int>();
-            for (int i=0; i<=(lastDay - firstDay).Days + 1; i++)
-                calendar.Add(firstDay.AddDays(i), 0);
-            var repositoryResponse = _workingHourRepository.GetCalendar(userId, firstDay, lastDay, calendar);
+            List<CalendarItem> calendar = new List<CalendarItem>();
+            var numberOfDays = (lastDay - firstDay).Days + 1;
+            for (int i=0; i<=numberOfDays; i++)
+            {
+                var calendarItem = new CalendarItem(0, firstDay.AddDays(i), CalendarEntityState.LowerThanMinimum);
+                calendar.Add(calendarItem);
+            }
+            var repositoryResponse = _workingHourRepository.GetCalendar(userId, firstDay, lastDay);
             var map = MapDTOs(repositoryResponse.Result, hoursPerWeek);
-            return Task.FromResult(new CalendarResponse(map, SumCalenderHours(map)));
+            var result = AddEmptyDays(calendar, map);
+            return Task.FromResult(new CalendarResponse(result, SumCalenderHours(result)));
         }
 
         private List<CalendarItem> MapDTOs(Dictionary<DateTime, int> repositoryResponse, int hoursPerWeek)
         {
             var result = new List<CalendarItem>();
+            var hoursPerDayPartTime = hoursPerWeek/10;
             foreach (var item in repositoryResponse)
             {
                 CalendarEntityState calendarEntityState = CalendarEntityState.LowerThanMinimum;
@@ -74,6 +80,15 @@ namespace TimeSheet.Service.Services
                 result.Add(new CalendarItem(item.Value, item.Key, calendarEntityState));
             }
             return result;
+        }
+
+        private List<CalendarItem> AddEmptyDays(List<CalendarItem> allDays, List<CalendarItem> repositoryDays)
+        {
+            //TODO : izbaciti ove prvo iz liste 
+            allDays = allDays.Where(item => !repositoryDays.Any(r => r.Date == item.Date)).ToList();
+            allDays.AddRange(repositoryDays);
+            allDays.OrderBy(item => item.Date);
+            return allDays;
         }
         private double SumCalenderHours(List<CalendarItem> calendarItems)
         {

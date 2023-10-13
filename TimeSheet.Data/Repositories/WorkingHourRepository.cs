@@ -126,24 +126,13 @@ namespace TimeSheet.Data.Repositories
             return Task.FromResult(result);
         }
 
-        public Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate, Dictionary<DateTime, int> calendar)
+        public Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate)
         {
             var workingHours = _dataContext.WorkingHours.Where(wh => wh.Date >= startDate && wh.Date <= endDate && wh.EmplyeeId == userId)
-                                                        .GroupBy(wh => wh.Date.Date).ToList()
-                                                        .Select(group =>
-                                                        {
-                                                            var date = group.Key;
-                                                            var totalTime = group.Sum(wh => wh.Time);
-                                                            return new
-                                                            {
-                                                                Date = date,
-                                                                TotalTime = totalTime
-                                                            };
-                                                        });
-            Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();
-            foreach (var group in workingHours)
-                calendar[group.Date] = (int)group.TotalTime;
-            return Task.FromResult(calendar);
+                                                        .GroupBy(wh => wh.Date.Date)
+                                                        .ToList()
+                                                        .ToDictionary(group => group.Key, group =>(int)group.Sum(wh => wh.Time));
+            return Task.FromResult(workingHours);
         }
         
     }
