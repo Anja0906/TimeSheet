@@ -98,6 +98,9 @@ namespace TimeSheet.Data.Migrations
                     b.Property<int>("EmplyeeStatus")
                         .HasColumnType("int");
 
+                    b.Property<int>("HoursPerWeek")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -106,6 +109,9 @@ namespace TimeSheet.Data.Migrations
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

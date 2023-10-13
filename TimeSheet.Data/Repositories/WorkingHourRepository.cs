@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using TimeSheet.Core.Exceptions;
 using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.Models;
@@ -25,11 +24,6 @@ namespace TimeSheet.Data.Repositories
             }
             var workingHourEntity = _mapper.Map<Entities.WorkingHour>(workingHour);
             _dataContext.WorkingHours.Add(workingHourEntity);
-            /*if (worker.WorkHours==null)
-            {
-                worker.WorkHours=new List<Entities.WorkingHour>();
-            }
-            worker.WorkHours.Add(workingHourEntity);*/
             _dataContext.SaveChanges();
             var createdModel = _mapper.Map<WorkingHour>(workingHourEntity);
             return Task.FromResult(createdModel);
@@ -99,38 +93,59 @@ namespace TimeSheet.Data.Repositories
         public Task<List<WorkingHour>> Report(ReportRequest reportRequest)
         {
             var baseQuery = _dataContext.WorkingHours.AsQueryable();
-            if (reportRequest.CategoryId != null)
+            if (reportRequest.CategoryId.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.CategoryId == reportRequest.CategoryId);
             }
-            if (reportRequest.ProjectId != null)
+            if (reportRequest.ProjectId.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.ProjectId == reportRequest.ProjectId);
             }
-            if (reportRequest.TeamMemberId != null)
+            if (reportRequest.TeamMemberId.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.EmplyeeId == reportRequest.TeamMemberId);
             }
-            if (reportRequest.ClientId != null)
+            if (reportRequest.ClientId.HasValue)
             {
                 baseQuery = baseQuery.Include(e => e.Project);
                 baseQuery = baseQuery.Where(e => e.Project.ClientId == reportRequest.ClientId);
             }
-            if (reportRequest.CategoryId != null)
+            if (reportRequest.CategoryId.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.CategoryId == reportRequest.CategoryId);
             }
-            if (reportRequest.From != null)
+            if (reportRequest.From.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.Date>=reportRequest.From);
             }
-            if (reportRequest.To != null)
+            if (reportRequest.To.HasValue)
             {
                 baseQuery = baseQuery.Where(e => e.Date<=reportRequest.To);
             }
             var result = _mapper.Map<List<WorkingHour>>(baseQuery);
             return Task.FromResult(result);
         }
+
+        public Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate, Dictionary<DateTime, int> calendar)
+        {
+            var workingHours = _dataContext.WorkingHours.Where(wh => wh.Date >= startDate && wh.Date <= endDate && wh.EmplyeeId == userId)
+                                                        .GroupBy(wh => wh.Date.Date).ToList()
+                                                        .Select(group =>
+                                                        {
+                                                            var date = group.Key;
+                                                            var totalTime = group.Sum(wh => wh.Time);
+                                                            return new
+                                                            {
+                                                                Date = date,
+                                                                TotalTime = totalTime
+                                                            };
+                                                        });
+            Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();
+            foreach (var group in workingHours)
+                calendar[group.Date] = (int)group.TotalTime;
+            return Task.FromResult(calendar);
+        }
+        
     }
 
-    }
+}

@@ -94,3 +94,6 @@ C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\runtimes\win
 C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\BCrypt.Net.dll
+C:\Users\anja.petkovic\Desktop\TimeSheet\TimeSheet\bin\Debug\net6.0\BCrypt.Net-Core.dll

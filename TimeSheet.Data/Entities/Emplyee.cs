@@ -17,8 +17,10 @@ namespace TimeSheet.Data.Entities
         public string? Email { get; set; }
         [NotMapped] 
         public string? Password { get; set; }
+        public int HoursPerWeek { get; set; }
 
         public string? PasswordHash { get; set; }
+        public string? Salt { get; set; }
         public EmplyeeStatus EmplyeeStatus { get; set; }
         public Role Role { get; set; }
         public virtual List<Project>? Projects { get; set; }

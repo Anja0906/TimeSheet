@@ -8,35 +8,30 @@ namespace TimeSheet.WebAPI.Mappers
     {
         public MappingProfiles()
         {
-            CreateMap<Category, CategoryDTO>();
-            CreateMap<CategoryDTO, Category>();
-            CreateMap<Category, CategoryResponseDTO>();
-            CreateMap<CategoryResponseDTO, Category>();
+            CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Category, CategoryResponseDTO>().ReverseMap();
 
-            CreateMap<Country, CountryResponseDTO>();
-            CreateMap<CountryResponseDTO, Country>();
-            CreateMap<Country, CountryDTO>();
-            CreateMap<CountryDTO, Country>();
+            CreateMap<Country, CountryResponseDTO>().ReverseMap();
+            CreateMap<CountryDTO, Country>().ReverseMap();
 
-            CreateMap<Client, ClientResponseDTO>();
-            CreateMap<ClientResponseDTO, Client>();
-            CreateMap<Client, ClientDTO>();
-            CreateMap<ClientDTO, Client>();
+            CreateMap<Client, ClientResponseDTO>().ReverseMap();
+            CreateMap<Client, ClientDTO>().ReverseMap();
 
-            CreateMap<Project, ProjectResponseDTO>();
-            CreateMap<ProjectResponseDTO, Project>();
-            CreateMap<Project, ProjectDTO>();
-            CreateMap<ProjectDTO, Project>();
+            CreateMap<Project, ProjectResponseDTO>().ReverseMap();
+            CreateMap<Project, ProjectDTO>().ReverseMap();
 
-            CreateMap<Emplyee, EmployeeResponseDTO>();
-            CreateMap<EmployeeResponseDTO, Emplyee>();
-            CreateMap<Emplyee, EmployeeDTO>();
-            CreateMap<EmployeeDTO, Emplyee>();
+            CreateMap<Emplyee, EmployeeResponseDTO>().ReverseMap();
+            CreateMap<Emplyee, EmployeeDTO>().ReverseMap();
 
-            CreateMap<WorkingHour, WorkingHourResponseDTO>();
-            CreateMap<WorkingHourResponseDTO, WorkingHour>();
-            CreateMap<WorkingHour, WorkingHourDTO>();
-            CreateMap<WorkingHourDTO, WorkingHour>();
+            CreateMap<WorkingHour, WorkingHourResponseDTO>().ReverseMap();
+            CreateMap<WorkingHour, WorkingHourDTO>().ReverseMap();
+
+            CreateMap<CalendarItem, CalendarItemDTO>().ReverseMap();
+
+            CreateMap<CalendarResponse, CalendarResponseDTO>().ReverseMap();
+            CreateMap<ReportResponse, ReportResponseMapDTO>().ReverseMap();
+            
+            CreateMap<LoginRequest, LoginRequestDTO>().ReverseMap();
         }
     }
 }

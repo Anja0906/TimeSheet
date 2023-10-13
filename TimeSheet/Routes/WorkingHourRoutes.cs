@@ -9,5 +9,6 @@
         public const string WorkingHourCreate = "/workingHour/create";
         public const string WorkingHourUpdate = "/workingHour/update";
         public const string WorkingHourDelete = "/workingHour/delete/{id}";
+        public const string Calendar = "/workingHour/calendar";
     }
 }

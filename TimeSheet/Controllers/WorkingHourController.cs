@@ -18,7 +18,7 @@ namespace TimeSheet.WebAPI.Controllers
             _workingHourService = workingHourService;
         }
         [HttpGet(WorkingHourRoutes.WorkingHourGetAll)]
-        [ProducesResponseType(typeof(List<WorkingHour>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<WorkingHourResponseDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
         {
             var serviceResponse = await _workingHourService.GetAll();
@@ -26,7 +26,7 @@ namespace TimeSheet.WebAPI.Controllers
             return Ok(response);
         }
         [HttpGet(WorkingHourRoutes.WorkingHourFindByName)]
-        [ProducesResponseType(typeof(WorkingHour), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(WorkingHourResponseDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string name)
         {
             var workingHour = await _workingHourService.GetByName(name);
@@ -34,7 +34,7 @@ namespace TimeSheet.WebAPI.Controllers
             return Ok(result);
         }
         [HttpGet(WorkingHourRoutes.WorkingHourFindById)]
-        [ProducesResponseType(typeof(WorkingHour), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(WorkingHourResponseDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetById(int id)
         {
             var workingHour = await _workingHourService.GetById(id);
@@ -67,11 +67,20 @@ namespace TimeSheet.WebAPI.Controllers
             return Ok("Successfully deleted workingHour!");
         }
         [HttpGet(WorkingHourRoutes.WorkingHourReport)]
-        [ProducesResponseType(typeof(List<WorkingHourResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ReportResponseMapDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetReport([FromQuery]ReportRequest reportRequest)
         {
             var serviceResponse = await _workingHourService.Report(reportRequest);
-            var response = _mapper.Map<List<WorkingHourResponseDTO>>(serviceResponse);
+            var response = _mapper.Map<ReportResponseMapDTO>(serviceResponse);
+            return Ok(response);
+        }
+        
+        [HttpGet(WorkingHourRoutes.Calendar)]
+        [ProducesResponseType(typeof(CalendarResponseDTO), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCalendar(int userId, int hoursPerWeek, DateTime startDate, DateTime endDate)
+        {
+            var serviceResponse = await _workingHourService.GetCalendar(userId,hoursPerWeek, startDate, endDate);
+            var response = _mapper.Map<CalendarResponseDTO>(serviceResponse);
             return Ok(response);
         }
 

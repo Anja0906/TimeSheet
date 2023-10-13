@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TimeSheet.Core.Models;
+﻿using TimeSheet.Core.Models;
 
 namespace TimeSheet.Core.IServices
 {
@@ -15,6 +10,7 @@ namespace TimeSheet.Core.IServices
         Task<WorkingHour> GetById(int id);
         Task<WorkingHour> AddWorkingHour(int WorkerId, WorkingHour workingHour);
         void DeleteWorkingHour(int id);
-        Task<List<WorkingHour>> Report(ReportRequest reportRequest);
+        Task<ReportResponse> Report(ReportRequest reportRequest);
+        Task<CalendarResponse> GetCalendar(int userId, int hoursPerWeek, DateTime firstDay, DateTime lastDay);
     }
 }

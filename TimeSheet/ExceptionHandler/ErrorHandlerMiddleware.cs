@@ -31,7 +31,11 @@ namespace TimeSheet.WebAPI.ExceptionHandler
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
                     case EmptyFieldException:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest; break;
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
+                    case WrongCredentialsException:
+                        response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;

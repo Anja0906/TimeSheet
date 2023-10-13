@@ -14,11 +14,13 @@ namespace TimeSheet.Service.Services
         }
         public Task<Emplyee> AddEmplyee(Emplyee emplyee)
         {
-            if (emplyee.Password==null)
+            if (emplyee.Password == null || emplyee.Password == "")
             {
                 throw new EmptyFieldException("Password must be different from ''");
             }
-            emplyee.PasswordHash = PasswordHasher.ComputeHash(emplyee.Password, PasswordHasher.GenerateSalt());
+            var salt = PasswordHasher.GenerateSalt();
+            emplyee.Salt = salt;
+            emplyee.PasswordHash = PasswordHasher.HashPassword(emplyee.Password, salt);
             return _emplyeeRepository.AddEmplyee(emplyee);
         }
 
@@ -34,7 +36,9 @@ namespace TimeSheet.Service.Services
 
         public Task<Emplyee> UpdateEmplyee(Emplyee emplyee)
         {
-            emplyee.PasswordHash = PasswordHasher.ComputeHash(emplyee.Password, PasswordHasher.GenerateSalt());
+            var salt = PasswordHasher.GenerateSalt();
+            emplyee.Salt = salt;
+            emplyee.PasswordHash = PasswordHasher.HashPassword(emplyee.Password, salt);
             return _emplyeeRepository.UpdateEmplyee(emplyee);
         }
 

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.WebAPI", "TimeSheet\TimeSheet.WebAPI.csproj", "{728BD421-7FD9-40E2-970C-35F3564FA241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.WebAPI", "TimeSheet\TimeSheet.WebAPI.csproj", "{728BD421-7FD9-40E2-970C-35F3564FA241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.Data", "TimeSheet.Data\TimeSheet.Data.csproj", "{E8D3260D-5614-47D4-A5D1-5FF28EFE557C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Data", "TimeSheet.Data\TimeSheet.Data.csproj", "{E8D3260D-5614-47D4-A5D1-5FF28EFE557C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.Core", "TimeSheet.Core\TimeSheet.Core.csproj", "{F3126198-D412-4DA4-AA7E-594D2D8B1FBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Core", "TimeSheet.Core\TimeSheet.Core.csproj", "{F3126198-D412-4DA4-AA7E-594D2D8B1FBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.Service", "TimeSheet.Infrastructure\TimeSheet.Service.csproj", "{6151E2D6-A86F-49F8-816E-85CD116BB960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Service", "TimeSheet.Infrastructure\TimeSheet.Service.csproj", "{6151E2D6-A86F-49F8-816E-85CD116BB960}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
