@@ -31,11 +31,6 @@ namespace TimeSheet.Service.Services
             return _workingHourRepository.UpdateWorkingHour(workingHour);
         }
 
-        public Task<WorkingHour> GetByName(string name)
-        {
-            return _workingHourRepository.GetByName(name);
-        }
-
         public Task<WorkingHour> GetById(int id)
         {
             return _workingHourRepository.GetById(id);

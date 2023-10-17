@@ -49,16 +49,6 @@ namespace TimeSheet.Data.Repositories
 
         }
 
-        public Task<WorkingHour> GetByName(string name)
-        {
-            var workingHourEntity = _dataContext.WorkingHours.Where(p => p.Description == name).FirstOrDefault();
-            if (workingHourEntity == null)
-            {
-                throw new ResourceNotFoundException("WorkingHour with that name does not exist!");
-            }
-            var workingHourModel = _mapper.Map<WorkingHour>(workingHourEntity);
-            return Task.FromResult(workingHourModel);
-        }
 
         public Task<WorkingHour> UpdateWorkingHour(WorkingHour workingHour)
         {

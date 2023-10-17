@@ -9,7 +9,6 @@ namespace TimeSheet.Core.IRepositories
 {
     public interface IWorkingHourRepository
     {
-        Task<WorkingHour> GetByName(string name);
         Task<WorkingHour> UpdateWorkingHour(WorkingHour workingHour);
         Task<List<WorkingHour>> GetAll();
         Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate);

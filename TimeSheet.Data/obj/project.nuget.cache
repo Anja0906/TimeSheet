@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "m9BukN1W4n/UvIuRZQfyMfKOef8QatpBRWVypo51qTMNZrWGr22huN71ghk2aRN5ba8/SCDEFpsdkqArwtqnNw==",
+  "dgSpecHash": "4L5kZfZZg34UMtPOlnnUaXonVyiH1MXNdFt0/Z9tclkh9UMeTwie1ySwE1KwF2x3ign5TrPILJYnlU5wrJTxIw==",
   "success": true,
   "projectFilePath": "C:\\Users\\anja.petkovic\\Desktop\\TimeSheet\\TimeSheet.Data\\TimeSheet.Data.csproj",
   "expectedPackageFiles": [
@@ -145,13 +145,13 @@
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit\\2.5.2\\xunit.2.5.2.nupkg.sha512",
+    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit\\2.5.3\\xunit.2.5.3.nupkg.sha512",
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.analyzers\\1.4.0\\xunit.analyzers.1.4.0.nupkg.sha512",
-    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.assert\\2.5.2\\xunit.assert.2.5.2.nupkg.sha512",
-    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.core\\2.5.2\\xunit.core.2.5.2.nupkg.sha512",
-    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.extensibility.core\\2.5.2\\xunit.extensibility.core.2.5.2.nupkg.sha512",
-    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.extensibility.execution\\2.5.2\\xunit.extensibility.execution.2.5.2.nupkg.sha512",
+    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.assert\\2.5.3\\xunit.assert.2.5.3.nupkg.sha512",
+    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.core\\2.5.3\\xunit.core.2.5.3.nupkg.sha512",
+    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.extensibility.core\\2.5.3\\xunit.extensibility.core.2.5.3.nupkg.sha512",
+    "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.extensibility.execution\\2.5.3\\xunit.extensibility.execution.2.5.3.nupkg.sha512",
     "C:\\Users\\anja.petkovic\\.nuget\\packages\\xunit.runner.visualstudio\\2.5.3\\xunit.runner.visualstudio.2.5.3.nupkg.sha512"
   ],
   "logs": [

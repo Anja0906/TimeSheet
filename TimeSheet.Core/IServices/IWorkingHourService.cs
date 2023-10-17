@@ -5,7 +5,6 @@ namespace TimeSheet.Core.IServices
 {
     public interface IWorkingHourService
     {
-        Task<WorkingHour> GetByName(string name);
         Task<WorkingHour> UpdateWorkingHour(WorkingHour workingHour);
         Task<List<WorkingHour>> GetAll();
         Task<WorkingHour> GetById(int id);
