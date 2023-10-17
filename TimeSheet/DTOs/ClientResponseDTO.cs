@@ -10,13 +10,13 @@ namespace TimeSheet.WebAPI.DTOs
         public string? City { get; set; }
         public string? PostalCode { get; set; }
         public int CountryId { get; set; }
-        public Country? Country { get; set; }
+        public CountryResponseDTO? Country { get; set; }
 
         public ClientResponseDTO()
         {
         }
 
-        public ClientResponseDTO(int id, string? name, string? address, string? city, string? postalCode, int countryId, Country? country)
+        public ClientResponseDTO(int id, string? name, string? address, string? city, string? postalCode, int countryId, CountryResponseDTO? country)
         {
             Id = id;
             Name = name;

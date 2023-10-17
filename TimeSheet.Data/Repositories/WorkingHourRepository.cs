@@ -18,10 +18,6 @@ namespace TimeSheet.Data.Repositories
         public Task<WorkingHour> AddWorkingHour(int WorkerId, WorkingHour workingHour)
         {
             var worker = _dataContext.Employees.FirstOrDefault(p => p.Id == WorkerId);
-            if (worker == null)
-            {
-                throw new ResourceNotFoundException("Employee with that id does not exist!");
-            }
             var workingHourEntity = _mapper.Map<Entities.WorkingHour>(workingHour);
             _dataContext.WorkingHours.Add(workingHourEntity);
             _dataContext.SaveChanges();
@@ -130,8 +126,7 @@ namespace TimeSheet.Data.Repositories
         {
             var workingHours = _dataContext.WorkingHours.Where(wh => wh.Date >= startDate && wh.Date <= endDate && wh.EmplyeeId == userId)
                                                         .GroupBy(wh => wh.Date.Date)
-                                                        .ToList()
-                                                        .ToDictionary(group => group.Key, group =>(int)group.Sum(wh => wh.Time));
+                                                        .ToDictionary(group => group.Key, group => (int)group.Sum(wh => wh.Time + wh.Overtime));
             return Task.FromResult(workingHours);
         }
         

@@ -22,9 +22,14 @@ namespace TimeSheet.Service.Services
             _projectRepository.DeleteProject(id);
         }
 
-        public Task<List<Project>> GetAll()
+        public Task<List<Project>> GetAll(UserClaims userClaims)
         {
-            return _projectRepository.GetAll();
+            if (userClaims.Role == Role.Admin) 
+            {
+                return _projectRepository.GetAll();
+            }
+
+            return _projectRepository.GetLeadingProjects(userClaims.Id);
         }
 
         public Task<Project> UpdateProject(Project project)
@@ -41,5 +46,6 @@ namespace TimeSheet.Service.Services
         {
             return _projectRepository.GetById(id);
         }
+
     }
 }

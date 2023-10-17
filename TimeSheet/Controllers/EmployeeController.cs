@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
@@ -8,13 +9,11 @@ using TimeSheet.WebAPI.Routes;
 namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IEmployeeService _emplyeeService;
-        public EmployeeController(IMapper mapper, IEmployeeService emplyeeService)
+        public EmployeeController(IMapper mapper, IEmployeeService emplyeeService) : base(mapper)
         {
-            _mapper = mapper;
             _emplyeeService = emplyeeService;
         }
         [HttpGet(EmployeeRoutes.EmployeeGetAll)]
@@ -41,6 +40,7 @@ namespace TimeSheet.WebAPI.Controllers
             var result = _mapper.Map<EmployeeResponseDTO>(emplyee);
             return Ok(result);
         }
+        [Authorize(Roles = Constants.Admin)]
         [HttpPost(EmployeeRoutes.EmployeeCreate)]
         [ProducesResponseType(typeof(EmployeeResponseDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> Post(EmployeeDTO emplyeeDTO)
@@ -50,30 +50,33 @@ namespace TimeSheet.WebAPI.Controllers
             var response = new { Model = _mapper.Map<EmployeeResponseDTO>(createdModel), Message = "Successfully created emplyee!" };
             return Ok(response);
         }
+        [Authorize(Roles = Constants.Admin)]
         [HttpPut(EmployeeRoutes.EmployeeUpdate)]
         [ProducesResponseType(typeof(Emplyee), StatusCodes.Status200OK)]
         public async Task<IActionResult> Put(EmployeeResponseDTO emplyeeDTO)
         {
             var emplyeeModel = _mapper.Map<Emplyee>(emplyeeDTO);
             var updatedModel = await _emplyeeService.UpdateEmplyee(emplyeeModel);
-            var response = new { Model = updatedModel, Message = "Successfully created emplyee!" };
+            var response = new { Model = _mapper.Map<EmployeeResponseDTO>(updatedModel), Message = "Successfully created emplyee!" };
             return Ok(response);
         }
+        [Authorize(Roles = Constants.Admin)]
         [HttpPut(EmployeeRoutes.EmployeeSetProject)]
         [ProducesResponseType(typeof(Emplyee), StatusCodes.Status200OK)]
         public async Task<IActionResult> Put(int id, ProjectDTO projectResponseDTO)
         {
             var projectModel = _mapper.Map<Project>(projectResponseDTO);
             var updatedModel = await _emplyeeService.AddProject(id, projectModel);
-            var response = new { Model = updatedModel, Message = "Successfully added project emplyee!" };
+            var response = new { Model = _mapper.Map<EmployeeResponseDTO>(updatedModel), Message = "Successfully added project emplyee!" };
             return Ok(response);
         }
+        [Authorize(Roles = Constants.Admin)]
         [HttpDelete(EmployeeRoutes.EmployeeDelete)]
         [ProducesResponseType(typeof(Emplyee), StatusCodes.Status200OK)]
         public IActionResult Delete(int id)
         {
             _emplyeeService.DeleteEmplyee(id);
-            return Ok("Successfully deleted emplyee!");
+            return Ok();
         }
 
     }

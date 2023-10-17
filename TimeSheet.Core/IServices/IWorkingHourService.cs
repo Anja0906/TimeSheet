@@ -1,4 +1,5 @@
-﻿using TimeSheet.Core.Models;
+﻿using System.Security.Claims;
+using TimeSheet.Core.Models;
 
 namespace TimeSheet.Core.IServices
 {

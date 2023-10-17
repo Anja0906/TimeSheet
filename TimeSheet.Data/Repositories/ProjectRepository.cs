@@ -80,17 +80,16 @@ namespace TimeSheet.Data.Repositories
 
         public async Task<List<Project>> GetAll()
         {
-            try
-            {
-                var categories = await _dataContext.Projects.ToListAsync();
-                var result = _mapper.Map<IEnumerable<Project>>(categories);
-                return result.ToList();
-            }
-            catch (Exception ex)
-            {
-                var a = 1;
-                throw ex;
-            }
+            var categories = await _dataContext.Projects.ToListAsync();
+            var result = _mapper.Map<IEnumerable<Project>>(categories);
+            return result.ToList();
+        }
+
+        public Task<List<Project>> GetLeadingProjects(int workerId)
+        {
+            var existingProject = _dataContext.Projects.Where(p => p.LeaderId == workerId).ToList();
+            var result = _mapper.Map<List<Project>>(existingProject);
+            return Task.FromResult(result);
         }
     }
 }

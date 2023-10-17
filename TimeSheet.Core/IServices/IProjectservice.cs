@@ -11,7 +11,7 @@ namespace TimeSheet.Core.IServices
     {
         Task<Project> GetByName(string name);
         Task<Project> UpdateProject(Project project);
-        Task<List<Project>> GetAll();
+        Task<List<Project>> GetAll(UserClaims userClaims);
         Task<Project> GetById(int id);
         Task<Project> AddProject(Project project);
         void DeleteProject(int id);

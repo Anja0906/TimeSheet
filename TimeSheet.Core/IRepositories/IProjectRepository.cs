@@ -15,5 +15,6 @@ namespace TimeSheet.Core.IRepositories
         Task<Project> GetById(int id);
         Task<Project> AddProject(Project project);
         void DeleteProject(int id);
+        Task<List<Project>> GetLeadingProjects(int workerId);
     }
 }

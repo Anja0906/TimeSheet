@@ -70,39 +70,27 @@ namespace TimeSheet.Data.Repositories
             _dataContext.Entry(existingEmplyee).CurrentValues.SetValues(emplyee);
             _dataContext.SaveChanges();
             var updatedEmplyee = _dataContext.Employees.Where(p => p.Id == emplyee.Id).FirstOrDefault();
-            if (updatedEmplyee == null)
-            {
-                throw new ArgumentException();
-            }
             var mappedEmplyee = _mapper.Map<Emplyee>(updatedEmplyee);
             return Task.FromResult(mappedEmplyee);
         }
 
         public Task<List<Emplyee>> GetAll()
         {
-            var categories = _dataContext.Employees
-                    .AsNoTracking().ToList();
+            var categories = _dataContext.Employees.AsNoTracking().ToList();
             List<Emplyee> result = _mapper.Map<List<Emplyee>>(categories);
             return Task.FromResult(result);
         }
         public Task<Emplyee> AddProject(int id, Project project)
         {
             var existingEmplyee = _dataContext.Employees.Where(p => p.Id == id).FirstOrDefault();
-            var existingProject = _dataContext.WorkingHours.Where(p => p.Id == 1).FirstOrDefault();
-   
+            if (existingEmplyee == null) 
+            {
+                throw new ResourceNotFoundException("Employee with that id does not exist!");
+            }
+            var projectEntity = _mapper.Map<Entities.Project>(project);
+            existingEmplyee.Projects.Add(projectEntity);
             _dataContext.SaveChanges();
             return Task.FromResult(_mapper.Map<Emplyee>(existingEmplyee));
-            /*if (existingEmplyee == null) { throw new ResourceNotFoundException("Emplyee with that id does not exist!"); }
-            if (existingEmplyee.Projects == null)
-            {
-                existingEmplyee.Projects = new List<Entities.Project> { _mapper.Map<Entities.Project>(project) };
-            }
-            existingEmplyee.Projects.Add(_mapper.Map<Entities.Project>(project));
-            _dataContext.SaveChanges();
-            return Task.FromResult(_mapper.Map<Emplyee>(existingEmplyee));*/
-
-
-
         }
     }
 }

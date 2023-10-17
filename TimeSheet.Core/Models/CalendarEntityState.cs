@@ -8,8 +8,8 @@ namespace TimeSheet.Core.Models
 {
     public enum CalendarEntityState
     {
-        EnteredPartTime,
-        EnteredFullTime,
-        LowerThanMinimum
+        AchievedFullTime,
+        NonAchievedFullTime,
+        Empty
     }
 }

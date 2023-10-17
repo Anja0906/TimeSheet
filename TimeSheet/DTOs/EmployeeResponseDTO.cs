@@ -12,7 +12,7 @@ namespace TimeSheet.WebAPI.DTOs
         public string? Email { get; set; }
         public EmplyeeStatus EmplyeeStatus { get; set; }
         public Role Role { get; set; }
-        public  List<Project>? Projects { get; set; }
+        public  List<ProjectResponseDTO>? Projects { get; set; }
 
         public EmployeeResponseDTO()
         {
@@ -28,7 +28,7 @@ namespace TimeSheet.WebAPI.DTOs
             Role = role;
         }
 
-        public EmployeeResponseDTO(int id, string? name, string? username, string? email, EmplyeeStatus emplyeeStatus, Role role, List<Project>? projects) : this(id, name, username, email, emplyeeStatus, role)
+        public EmployeeResponseDTO(int id, string? name, string? username, string? email, EmplyeeStatus emplyeeStatus, Role role, List<ProjectResponseDTO>? projects) : this(id, name, username, email, emplyeeStatus, role)
         {
             Projects = projects;
         }

@@ -8,10 +8,10 @@ using TimeSheet.Core.Exceptions;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
 using TimeSheet.WebAPI.DTOs;
+using TimeSheet.WebAPI.Routes;
 
 namespace TimeSheet.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace TimeSheet.WebAPI.Controllers
             _loginService = loginService;
         }
 
-        [HttpPost]
+        [HttpPost(Constants.LoginRoute)]
         public IActionResult Post([FromBody] LoginRequestDTO loginRequest)
         {
             var userRequest = _mapper.Map<LoginRequest>(loginRequest);
@@ -40,8 +40,8 @@ namespace TimeSheet.WebAPI.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, loginRequest.Email),
-                new Claim("Role", user.Role.ToString()),
+                new Claim("Id", user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
                 new Claim("HoursPerWeek", user.HoursPerWeek.ToString())
             };
 

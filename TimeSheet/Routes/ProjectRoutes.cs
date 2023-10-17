@@ -8,5 +8,6 @@
         public const string ProjectCreate = "/project/create";
         public const string ProjectUpdate = "/project/update";
         public const string ProjectDelete = "/project/delete/{id}";
+        public const string LeadingProjects = "/project/leading";
     }
 }
