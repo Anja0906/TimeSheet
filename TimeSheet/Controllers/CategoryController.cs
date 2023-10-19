@@ -11,7 +11,7 @@ using TimeSheet.WebAPI.Routes;
 namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
-    public class CategoryController : BaseController
+    public class CategoryController : BaseAuthorizedController
     {
         private readonly ICategoryService _categoryService;
         public CategoryController(IMapper mapper, ICategoryService categoryService)

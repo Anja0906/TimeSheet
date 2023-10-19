@@ -9,7 +9,7 @@ using TimeSheet.WebAPI.Routes;
 namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
-    public class ProjectController : BaseController
+    public class ProjectController : BaseAuthorizedController
     {
         private readonly IProjectservice _projectService;
         public ProjectController(IMapper mapper, IProjectservice projectService) : base(mapper) 

@@ -10,7 +10,7 @@ namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
     
-    public class ClientController : BaseController
+    public class ClientController : BaseAuthorizedController
     {
         private readonly IClientService _clientService;
         public ClientController(IMapper mapper, IClientService clientService) : base(mapper)

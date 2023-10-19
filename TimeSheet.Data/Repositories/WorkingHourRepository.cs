@@ -61,10 +61,6 @@ namespace TimeSheet.Data.Repositories
             _dataContext.Entry(existingWorkingHour).CurrentValues.SetValues(workingHour);
             _dataContext.SaveChanges();
             var updatedWorkingHour = _dataContext.WorkingHours.Where(p => p.Id == workingHour.Id).FirstOrDefault();
-            if (updatedWorkingHour == null)
-            {
-                throw new ArgumentException();
-            }
             var mappedWorkingHour = _mapper.Map<WorkingHour>(updatedWorkingHour);
             return Task.FromResult(mappedWorkingHour);
         }
@@ -115,6 +111,7 @@ namespace TimeSheet.Data.Repositories
         public Task<Dictionary<DateTime, int>> GetCalendar(int userId, DateTime startDate, DateTime endDate)
         {
             var workingHours = _dataContext.WorkingHours.Where(wh => wh.Date >= startDate && wh.Date <= endDate && wh.EmplyeeId == userId)
+                                                        .AsEnumerable()
                                                         .GroupBy(wh => wh.Date.Date)
                                                         .ToDictionary(group => group.Key, group => (int)group.Sum(wh => wh.Time + wh.Overtime));
             return Task.FromResult(workingHours);

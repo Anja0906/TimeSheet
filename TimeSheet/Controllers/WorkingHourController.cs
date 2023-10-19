@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
@@ -9,7 +8,7 @@ using TimeSheet.WebAPI.Routes;
 namespace TimeSheet.WebAPI.Controllers
 {
     [ApiController]
-    public class WorkingHourController : BaseController
+    public class WorkingHourController : BaseAuthorizedController
     {
         private readonly IWorkingHourService _workingHourService;
 
@@ -18,7 +17,6 @@ namespace TimeSheet.WebAPI.Controllers
         {
             _workingHourService = workingHourService;
         }
-        [Authorize(Roles = Constants.Admin)]
         [HttpGet(WorkingHourRoutes.WorkingHourGetAll)]
         [ProducesResponseType(typeof(List<WorkingHourResponseDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
@@ -35,27 +33,24 @@ namespace TimeSheet.WebAPI.Controllers
             var result = _mapper.Map<WorkingHourResponseDTO>(workingHour);
             return Ok(result);
         }
-        [Authorize(Roles = Constants.Worker)]
         [HttpPost(WorkingHourRoutes.WorkingHourCreate)]
         [ProducesResponseType(typeof(WorkingHour), StatusCodes.Status200OK)]
         public async Task<IActionResult> Post(WorkingHourDTO workingHourDTO)
         {
             var workingHourModel = _mapper.Map<WorkingHour>(workingHourDTO);
             var createdModel = await _workingHourService.AddWorkingHour(UserClaims.Id, workingHourModel);
-            var response = new { Model = _mapper.Map<WorkingHourDTO>(createdModel), Message = "Successfully created workingHour!" };
+            var response = new { Model = _mapper.Map<WorkingHourResponseDTO>(createdModel), Message = "Successfully created workingHour!" };
             return Ok(response);
         }
-        [Authorize(Roles = Constants.Worker)]
         [HttpPut(WorkingHourRoutes.WorkingHourUpdate)]
         [ProducesResponseType(typeof(WorkingHour), StatusCodes.Status200OK)]
         public async Task<IActionResult> Put(WorkingHourResponseDTO workingHourDTO)
         {
             var workingHourModel = _mapper.Map<WorkingHour>(workingHourDTO);
             var updatedModel = await _workingHourService.UpdateWorkingHour(workingHourModel);
-            var response = new { Model = _mapper.Map<WorkingHourDTO>(updatedModel), Message = "Successfully created workingHour!" };
+            var response = new { Model = _mapper.Map<WorkingHourResponseDTO>(updatedModel), Message = "Successfully created workingHour!" };
             return Ok(response);
         }
-        [Authorize(Roles = Constants.Worker)]
         [HttpDelete(WorkingHourRoutes.WorkingHourDelete)]
         [ProducesResponseType(typeof(WorkingHour), StatusCodes.Status200OK)]
         public IActionResult Delete(int id)

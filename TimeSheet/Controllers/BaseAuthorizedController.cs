@@ -7,18 +7,12 @@ using TimeSheet.WebAPI.Routes;
 namespace TimeSheet.WebAPI.Controllers
 {
     [Authorize]
-    public class BaseController : Controller
+    public class BaseAuthorizedController : Controller
     {
         protected readonly IMapper _mapper;
-        protected UserClaims UserClaims
-        {
-            get
-            {
-                return HttpContext.Items[Constants.User] as UserClaims;
-            }
-        }
+        protected UserClaims UserClaims => HttpContext.Items[Constants.User] as UserClaims;
 
-        public BaseController(IMapper mapper)
+        public BaseAuthorizedController(IMapper mapper)
         {
             _mapper = mapper;
         }
