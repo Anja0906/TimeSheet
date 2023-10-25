@@ -74,11 +74,11 @@ namespace TimeSheet.Data.Repositories
             return Task.FromResult(mappedEmplyee);
         }
 
-        public Task<List<Emplyee>> GetAll()
+        public async Task<List<Emplyee>> GetAll()
         {
-            var categories = _dataContext.Employees.AsNoTracking().ToList();
+            var categories = await _dataContext.Employees.AsNoTracking().ToListAsync();
             List<Emplyee> result = _mapper.Map<List<Emplyee>>(categories);
-            return Task.FromResult(result);
+            return result;
         }
         public Task<Emplyee> AddProject(int id, Project project)
         {

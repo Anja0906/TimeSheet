@@ -16,5 +16,6 @@ namespace TimeSheet.Core.IRepositories
         Task<WorkingHour> AddWorkingHour(int WorkerId, WorkingHour workingHour);
         void DeleteWorkingHour(int id);
         Task<List<WorkingHour>> Report(ReportRequest reportRequest);
+        Task<List<WorkingHour>> GetWorkingHoursForDay(int id, DateTime day);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TimeSheet.Core.Exceptions;
 using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.Models;
@@ -77,11 +78,11 @@ namespace TimeSheet.Data.Repositories
             return Task.FromResult(mappedClient);
         }
 
-        public Task<List<Client>> GetAll()
+        public async Task<List<Client>> GetAll()
         {
-            var categories = _dataContext.Clients.OrderBy(p => p.Id).ToList();
+            var categories = await _dataContext.Clients.OrderBy(p => p.Id).ToListAsync();
             List<Client> result = _mapper.Map<List<Client>>(categories);
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

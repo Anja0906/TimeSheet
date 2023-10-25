@@ -81,8 +81,8 @@ namespace TimeSheet.Data.Repositories
         public async Task<List<Project>> GetAll()
         {
             var categories = await _dataContext.Projects.ToListAsync();
-            var result = _mapper.Map<IEnumerable<Project>>(categories);
-            return result.ToList();
+            var result = _mapper.Map<List<Project>>(categories);
+            return result;
         }
 
         public Task<List<Project>> GetLeadingProjects(int workerId)

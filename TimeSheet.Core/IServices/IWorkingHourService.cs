@@ -12,5 +12,6 @@ namespace TimeSheet.Core.IServices
         void DeleteWorkingHour(int id);
         Task<ReportResponse> Report(ReportRequest reportRequest);
         Task<CalendarResponse> GetCalendar(int userId, int hoursPerWeek, DateTime firstDay, DateTime lastDay);
+        Task<List<WorkingHour>> GetWorkingHoursForDay(int id, DateTime day);
     }
 }

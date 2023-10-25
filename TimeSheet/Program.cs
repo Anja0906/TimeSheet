@@ -61,7 +61,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
      };
  });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")  // Add your React app's URL
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -85,9 +93,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(options => options.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader());
+app.UseCors("ReactPolicy");
+
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<ExtractClaimsMiddleware>();
 

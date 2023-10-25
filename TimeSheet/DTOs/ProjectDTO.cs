@@ -11,10 +11,11 @@ namespace TimeSheet.WebAPI.DTOs
         public int LeaderId { get; set; }
         public int CategoryId { get; set; }
         public int ClientId { get; set; }
+        public int EmployeeId { get; set; }
 
         public ProjectDTO() { }
 
-        public ProjectDTO(string? name, string? description, ProjectStatus status, int leaderId, int categoryId, int clientId)
+        public ProjectDTO(string? name, string? description, ProjectStatus status, int leaderId, int categoryId, int clientId, int employeeId)
         {
             Name = name;
             Description = description;
@@ -22,6 +23,7 @@ namespace TimeSheet.WebAPI.DTOs
             LeaderId = leaderId;
             CategoryId = categoryId;
             ClientId = clientId;
+            EmployeeId = employeeId;
         }
     }
-}
+    }

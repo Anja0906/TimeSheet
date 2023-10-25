@@ -74,5 +74,13 @@ namespace TimeSheet.WebAPI.Controllers
             var response = _mapper.Map<CalendarResponseDTO>(serviceResponse);
             return Ok(response);
         }
+        [HttpGet(WorkingHourRoutes.GetByDay)]
+        [ProducesResponseType(typeof(List<WorkingHourResponseDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetByDay(DateTime day)
+        {
+            var serviceResponse = await _workingHourService.GetWorkingHoursForDay(UserClaims.Id, day);
+            var response = _mapper.Map<List<WorkingHourResponseDTO>>(serviceResponse);
+            return Ok(response);
+        }
     }
 }

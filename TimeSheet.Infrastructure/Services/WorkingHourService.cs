@@ -1,4 +1,5 @@
-﻿using TimeSheet.Core.IRepositories;
+﻿using Azure;
+using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.IServices;
 using TimeSheet.Core.Models;
 
@@ -82,5 +83,10 @@ namespace TimeSheet.Service.Services
             return new CalendarItem(time, date, calendarEntityState);
         }
 
+        public async Task<List<WorkingHour>> GetWorkingHoursForDay(int id, DateTime day)
+        {
+            var workingHours = await _workingHourRepository.GetWorkingHoursForDay(id, day);
+            return workingHours;
+        }
     }
 }

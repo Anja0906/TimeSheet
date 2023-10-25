@@ -65,11 +65,11 @@ namespace TimeSheet.Data.Repositories
             return Task.FromResult(mappedWorkingHour);
         }
 
-        public Task<List<WorkingHour>> GetAll()
+        public async  Task<List<WorkingHour>> GetAll()
         {
-            var categories = _dataContext.WorkingHours.OrderBy(p => p.Id).ToList();
+            var categories = await _dataContext.WorkingHours.OrderBy(p => p.Id).ToListAsync();
             List<WorkingHour> result = _mapper.Map<List<WorkingHour>>(categories);
-            return Task.FromResult(result);
+            return result;
         }
 
         public Task<List<WorkingHour>> Report(ReportRequest reportRequest)
@@ -116,7 +116,13 @@ namespace TimeSheet.Data.Repositories
                                                         .ToDictionary(group => group.Key, group => (int)group.Sum(wh => wh.Time + wh.Overtime));
             return Task.FromResult(workingHours);
         }
-        
+
+        public async  Task<List<WorkingHour>> GetWorkingHoursForDay(int id, DateTime day)
+        {
+            var workingHoursEntity =  await _dataContext.WorkingHours.Where(p => p.Date == day && p.EmplyeeId==id).ToListAsync();
+            var workingHoursModel =  _mapper.Map<List<WorkingHour>>(workingHoursEntity);
+            return workingHoursModel;
+        }
     }
 
 }

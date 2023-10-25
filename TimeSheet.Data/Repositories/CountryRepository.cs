@@ -1,6 +1,7 @@
 ﻿
 
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TimeSheet.Core.Exceptions;
 using TimeSheet.Core.IRepositories;
 using TimeSheet.Core.Models;
@@ -36,11 +37,11 @@ namespace TimeSheet.Data.Repositories
             _dataContext.SaveChanges();
         }
 
-        public Task<List<Country>> GetAll()
+        public async Task<List<Country>> GetAll()
         {
-            var countries = _dataContext.Countries.OrderBy(p => p.Id).ToList();
+            var countries = await _dataContext.Countries.OrderBy(p => p.Id).ToListAsync();
             List<Country> result = _mapper.Map<List<Country>>(countries);
-            return Task.FromResult(result);
+            return result;
         }
 
         public Task<Country> GetById(int id)
