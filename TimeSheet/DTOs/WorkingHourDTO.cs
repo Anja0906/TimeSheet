@@ -14,12 +14,13 @@ namespace TimeSheet.WebAPI.DTOs
 
         public WorkingHourDTO() { }
 
-        public WorkingHourDTO(DateTime date, string? description, int projectId, int categoryId, double time, double overtime)
+        public WorkingHourDTO(DateTime date, string? description, int projectId, int categoryId, int emplyeeId, double time, double overtime)
         {
             Date = date;
             Description = description;
             ProjectId = projectId;
             CategoryId = categoryId;
+            EmplyeeId = emplyeeId;
             Time = time;
             Overtime = overtime;
         }

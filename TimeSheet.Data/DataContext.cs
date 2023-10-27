@@ -28,15 +28,18 @@ namespace TimeSheet.Data
                 .WithMany()
                 .HasForeignKey(p => p.LeaderId).OnDelete(DeleteBehavior.Restrict);
 
-            
-            modelBuilder.Entity<WorkingHour>().HasOne(w => w.Emplyee).WithMany()
-                .HasForeignKey(p => p.EmplyeeId);
 
             modelBuilder.Entity<WorkingHour>().HasOne(wh => wh.Project)
                 .WithMany()
                 .HasForeignKey(wh => wh.ProjectId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<WorkingHour>()
+            .HasOne(wh => wh.Emplyee)
+            .WithMany()
+            .HasForeignKey(wh => wh.EmplyeeId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            
+
+
         }
     }
 }
